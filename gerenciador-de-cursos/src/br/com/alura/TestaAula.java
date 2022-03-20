@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class AulaTest {
+public class TestaAula {
 
 	public static void main(String[] args) {
 		Aula a1 = new Aula("Revistando as ArrayLists", 21);
