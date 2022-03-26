@@ -16,7 +16,7 @@ public class Curso {
 	private List<Aula> aulas = new LinkedList<Aula>();
 	private Set<Aluno> alunos = new HashSet<>();
 	private Map<Integer, Aluno> matriculaParaAluno = new HashMap<>();
-	
+
 	public Curso(String nome, String instrutor) {
 		this.nome = nome;
 		this.instrutor = instrutor;
@@ -33,22 +33,32 @@ public class Curso {
 	public List<Aula> getAulas() {
 		return Collections.unmodifiableList(aulas);
 	}
-	
+
+	public Set<Aluno> getAlunos() {
+		return Collections.unmodifiableSet(alunos);
+	}
+
 	public void adiciona(Aula aula) {
 		this.aulas.add(aula);
 	}
 
-	public void matricula(Aluno aluno){
-	    this.alunos.add(aluno);
-	    this.matriculaParaAluno.put(aluno.getNumeroMatricula(), aluno);
+	public int getTempoTotal() {
+		return this.aulas.stream().mapToInt(Aula::getTempo).sum();
 	}
-	
-	public Set<Aluno> getAlunos() {
-	    return Collections.unmodifiableSet(alunos);
+
+	@Override
+	public String toString() {
+		return "[Curso: " + nome + ", tempo total: " + this.getTempoTotal()
+				+ ", aulas: + " + this.aulas + "]";
+	}
+
+	public void matricula(Aluno aluno) {
+		this.alunos.add(aluno);
+		this.matriculaParaAluno.put(aluno.getNumeroMatricula(), aluno);
 	}
 
 	public boolean estaMatriculado(Aluno aluno) {
-	    return this.alunos.contains(aluno);
+		return this.alunos.contains(aluno);
 	}
 
 	public Aluno buscaMatriculado(int numero) {
